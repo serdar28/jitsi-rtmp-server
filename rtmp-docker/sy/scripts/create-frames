@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+STREAM=$1
+ffmpeg -i rtmp://127.0.0.1/livestream/$STREAM -vf fps=1 /usr/local/eb/recordings/frames-$STREAM-%03d.png

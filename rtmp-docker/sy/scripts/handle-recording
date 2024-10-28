@@ -1,0 +1,7 @@
+#!/bin/bash
+set -e
+FOLDER=$1
+MP4FILE=$(uuidgen)_$FOLDER.mp4
+
+ffmpeg -i $FOLDER.flv -c copy /usr/local/eb/recordings/$MP4FILE
+rm -f $FOLDER.flv

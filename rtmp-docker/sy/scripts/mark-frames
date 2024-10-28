@@ -1,0 +1,12 @@
+#!/bin/bash
+set -e
+STREAM=$1
+
+# Her yeni kareyi en son kare olarak işaretle
+while true; do
+    LATEST_FRAME=$(ls /usr/local/eb/recordings/frames-$STREAM-*.png | sort | tail -n 1)
+    if [[ -n "$LATEST_FRAME" ]]; then
+        echo $LATEST_FRAME > /usr/local/eb/recordings/latest-frame-$STREAM.txt
+    fi
+    sleep 5
+done
