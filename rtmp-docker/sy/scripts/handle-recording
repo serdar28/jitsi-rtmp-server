@@ -1,7 +1,21 @@
 #!/bin/bash
 set -e
-FOLDER=$1
-MP4FILE=$(uuidgen)_$FOLDER.mp4
 
-ffmpeg -i $FOLDER.flv -c copy /usr/local/eb/recordings/$MP4FILE
-rm -f $FOLDER.flv
+BASE=/usr/local/eb/recordings
+STREAM=$1
+
+[[ -z "$STREAM" ]] && exit 1
+
+
+# -----------------------------------------------------------------------------
+function on_exit {
+    :
+}
+trap on_exit EXIT
+
+
+# -----------------------------------------------------------------------------
+ffmpeg -v quiet -i $BASE/$STREAM.flv -nostdin -nostats \
+    -c copy -movflags faststart -y $BASE/$STREAM.mp4
+
+rm -f $BASE/$STREAM.flv
