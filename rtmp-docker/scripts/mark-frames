@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-BASE=/usr/local/eb/livestream/frames
+BASE=/usr/local/sy/livestream/frames
 STREAM=$1
 
 [[ -z "$STREAM" ]] && exit 1
