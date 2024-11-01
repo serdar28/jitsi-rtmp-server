@@ -1,13 +1,22 @@
+version: '3.8'
+
 services:
   rtmp:
     build: .  # Dockerfile'ın bulunduğu dizini belirtin
     ports:
       - "1935:1935"  # RTMP portu
       - "80:80"      # HTTP portu
-    volumes:
-      - ./sy:/usr/local/sy  # sy dizinini bağlama (livestream, recordings)
-      - ./script/:/usr/local/bin
-      - ./nginx.conf:/etc/nginx/nginx.conf  # Nginx yapılandırma dosyasını bağlama
-    command: /bin/bash -c "chown -R www-data:www-data /usr/local/sy/* && chmod +x /usr/local/sy/scripts/create-frames /usr/local/sy/scripts/handle-recording /usr/local/sy/scripts/mark-frames && nginx -g 'daemon off;'" 
-    command: /bin/bash -c "ln -s /usr/local/sy/livestream/frames /media/frames"
+#    volumes:
+#      - ./sy:/usr/local/sy  # sy dizinini bağlama (livestream, recordings)
+#      - ./scripts:/usr/local/bin  # Script dizinini volume olarak bağlama
+    networks:
+      rtmp_net:
+        ipv4_address: 172.22.22.11
     restart: always
+
+networks:
+  rtmp_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.22.22.0/24
