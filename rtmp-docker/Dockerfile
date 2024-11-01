@@ -33,6 +33,22 @@ RUN chmod 755 /usr/local/bin/create-frames \
               /usr/local/bin/mark-frames \
               /usr/local/bin/handle-recording
 
+# Gerekli dizinleri oluşturuyoruz
+RUN mkdir -p /usr/local/sy/recordings \
+    /usr/local/sy/livestream/stat \
+    /media/frames && \
+    chown www-data: /usr/local/sy/recordings && \
+    chown www-data: /usr/local/sy/livestream -R
+
+# Gerekli araçları kopyalıyoruz (script dizinindeki dosyalar)
+COPY script/create-frames /usr/local/bin/create-frames
+COPY script/mark-frames /usr/local/bin/mark-frames
+COPY script/handle-recording /usr/local/bin/handle-recording
+
+RUN chmod 755 /usr/local/bin/create-frames \
+    /usr/local/bin/mark-frames \
+    /usr/local/bin/handle-recording
+
 # Özel Nginx yapılandırma dosyaları ekliyoruz
 COPY etc/nginx/access_list_http.conf /etc/nginx/
 COPY etc/nginx/access_list_rtmp_play.conf /etc/nginx/

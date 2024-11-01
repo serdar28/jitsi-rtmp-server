@@ -6,9 +6,8 @@ services:
     ports:
       - "1935:1935"  # RTMP portu
       - "80:80"      # HTTP portu
-#    volumes:
-#      - ./sy:/usr/local/sy  # sy dizinini bağlama (livestream, recordings)
-#      - ./scripts:/usr/local/bin  # Script dizinini volume olarak bağlama
+    volumes:
+      - ./sy/:/usr/local/sy/recordings  # (recordings -  kayıtları bağlama)
     networks:
       rtmp_net:
         ipv4_address: 172.22.22.11
