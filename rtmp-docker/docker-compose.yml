@@ -6,8 +6,8 @@ services:
     ports:
       - "1935:1935"  # RTMP portu
       - "80:80"      # HTTP portu
-    volumes:
-      - ./sy/:/usr/local/sy/recordings  # (recordings -  kayıtları bağlama)
+#    volumes:
+#      - ./sy/recordings:/usr/local/sy/recordings  # (recordings -  kayıtları bağlama)
     networks:
       rtmp_net:
         ipv4_address: 172.22.22.11
