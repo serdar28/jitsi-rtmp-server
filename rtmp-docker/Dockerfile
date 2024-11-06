@@ -9,6 +9,9 @@ RUN apt-get update && \
     libnginx-mod-rtmp \
     xz-utils \
     libxml-xpath-perl \
+    procps \
+    grep \
+    nano \
     curl \
     zsh && \
     rm -rf /var/lib/apt/lists/*
