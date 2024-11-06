@@ -54,7 +54,8 @@ RUN ln -s /etc/nginx/sites-available/livestream.conf /etc/nginx/sites-enabled/ &
     sed -i 's/^worker_processes .*$/worker_processes 1;/' /etc/nginx/nginx.conf
 
 # Bağlantı dosyaları
-RUN ln -s /media/frames /usr/local/sy/livestream/frames
+RUN ln -s /media/frames /usr/local/sy/livestream/frames && \
+    chown www-data: /media/frames
 
 # Çalıştırılacak komut
 CMD ["nginx", "-g", "daemon off;"]
